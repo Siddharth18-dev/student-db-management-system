@@ -38,9 +38,3 @@ jobs:
       # 5️⃣ Run Tests
       - name: Run Tests
         run: make test
-        
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: StudentDBSystem
-          path: install/bin/StudentDBSystem
