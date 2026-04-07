@@ -99,7 +99,7 @@ $(BUILD_DIR)/$(BUILD_SUBDIR)/tests/%.o: $(TEST_DIR)/%.cpp
 # Clean
 # ================================
 clean:
-	rm -rf build bin
+	rm -rf build bin install
 
 -include $(DEPS)
 

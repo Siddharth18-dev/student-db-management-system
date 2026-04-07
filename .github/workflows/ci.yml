@@ -39,13 +39,19 @@ jobs:
       - name: Run Tests
         run: make test
 
-      - name: Debug - Check files
-        run: |
-          echo "==== CURRENT DIRECTORY ===="
-          pwd
+      # - name: Debug - Check files
+      #   run: |
+      #     echo "==== CURRENT DIRECTORY ===="
+      #     pwd
       
-          echo "==== FULL TREE ===="
-          ls -R
+      #     echo "==== FULL TREE ===="
+      #     ls -R
 
-          echo "==== SEARCHING BINARY ===="
-          find . -type f -name "StudentDBSystem"
+      #     echo "==== SEARCHING BINARY ===="
+      #     find . -type f -name "StudentDBSystem"/
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: StudentDBSystem
+          path: |
+            ./install/bin/StudentDBSystem
