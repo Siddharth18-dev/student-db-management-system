@@ -38,3 +38,14 @@ jobs:
       # 5️⃣ Run Tests
       - name: Run Tests
         run: make test
+
+      - name: Debug - Check files
+        run: |
+          echo "==== CURRENT DIRECTORY ===="
+          pwd
+      
+          echo "==== FULL TREE ===="
+          ls -R
+
+          echo "==== SEARCHING BINARY ===="
+          find . -type f -name "StudentDBSystem"
