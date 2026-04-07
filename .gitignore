@@ -1,0 +1,6 @@
+build/
+bin/
+install/
+*.o
+*.d
+*.out
