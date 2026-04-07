@@ -31,7 +31,9 @@ jobs:
 
       # 4️⃣ Build your project (Release)
       - name: Build Project
-        run: make
+        run: |
+          make
+          make install
 
       # 5️⃣ Run Tests
       - name: Run Tests
