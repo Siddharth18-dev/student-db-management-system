@@ -1,0 +1,57 @@
+name: Release Pipeline
+
+on:
+  push:
+    tags:
+      - 'v*'   # triggers on version tags like v1.0.0
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Install dependencies
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake libgtest-dev
+
+      # 3️⃣ Build Google Test (Ubuntu requires manual build)
+      - name: Build Google Test
+        run: |
+          cd /usr/src/gtest
+          sudo cmake .
+          sudo make
+          sudo cp lib/*.a /usr/lib
+
+      # 4️⃣ Build project (Release mode)
+      - name: Build Project (Release)
+        run: |
+          make BUILD_TYPE=release
+          make install
+
+      # 5️⃣ Run tests (VERY IMPORTANT gate)
+      - name: Run Tests
+        run: make test
+
+      # 6️⃣ Prepare package (preserve install structure)
+      - name: Package Application
+        run: |
+          mkdir -p release/install/bin/storage
+          cp ./install/bin/StudentDBSystem release/install/bin/
+          tar -czf StudentDBSystem-${{ github.ref_name }}.tar.gz -C release .
+
+      # 7️⃣ Create GitHub Release + Upload artifact
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          generate_release_notes: true
+          files: StudentDBSystem-${{ github.ref_name }}.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
