@@ -1,5 +1,7 @@
 # 🎓 Student Database Management System (C++)
 
+[![Release Pipeline](https://github.com/Siddharth18-dev/student-db-management-system/actions/workflows/release.yml/badge.svg)](https://github.com/Siddharth18-dev/student-db-management-system/actions/workflows/release.yml)
+
 A modular, file-based **Student Database Management System** built in **C++17**, designed with a layered architecture and enhanced with **unit testing, CI/CD, and production-grade build systems**.
 
 ---
